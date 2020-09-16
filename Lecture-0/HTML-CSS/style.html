@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Hello!</title>
+        <link rel="stylesheet" href="styles.css">
+        <style>
+            h2 {
+                color: blue; 
+                text-align: center;
+            }
+            div {
+                background-color: orange;
+                width: 200Px;
+                height: 200px;
+                padding: 20px;
+                margin: 20px;
+                font-family: Arial, Helvetica, sans-serif;
+                font-size: 28px;
+                font-weight: bold;
+                border: 3px solid black;
+            }
+            table, td, th {
+                border: 1px solid black;
+                border-collapse: collapse;
+                padding: 5px;
+            }
+            #foo {
+                color: blueviolet;
+            }
+            .baz {
+                color: green;
+            }
+            ul > li {
+                color: blue;
+            }
+            a[href="https://facebook.com"] {
+                color: red;
+            }
+            button {
+                width: 200px;
+                height: 50px;
+                font-size: 24px;
+                background-color: green;
+            }
+            button:hover{
+                background-color: orange;
+            }
+        </style>
+    </head>
+    <body>
+        <h1 style="color:green; text-align: center;">This is an H1 using inline CSS</h1>
+        <h2>This is an H2 using internal CSS</h2>
+        <h3>This is an H3 heading using external CSS</h3>
+        Hello, world!
+        <div>
+            Hello, world!
+        </div>
+        Some more text.
+        <table>
+            <thead>
+                <tr>
+                    <th>Ocean</th>
+                    <th>Average Depth</th>
+                    <th>Maximum Depth</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Pacific Ocean</td>
+                    <td>4,280 m</td>
+                    <td>10,911</td>
+                </tr>
+                <tr>
+                    <td>Atlantic Ocean</td>
+                    <td>3,646</td>
+                    <td>8,486</td>
+                </tr>
+            </tbody>
+        </table>
+        <h4 id="foo">Test Heading 1 - Selected usind id="foo"</h4>
+        <h4 class="baz">Test Heading 2 - Selected using class="baz"</h4>
+        <h4 class="baz">Test Heading 3 - Selected using class="baz"</h4>
+    
+        <ol>
+            <li>list item one</li>
+            <li>list item two</li>
+            <ul>
+                <li>sublist item one</li>
+                <li>sublist item two</li>
+            </ul>
+            <li>list item three</li>
+        </ol>
+        <ol>
+            <li><a href="https://google.com">Google</a></li>
+            <li><a href="https://facebook.com">Facebook</a></li>
+            <li><a href="https://amazon.com">Amazon</a></li>
+        </ol>
+        <button>Click Me</button>
+    </body>
+</html>

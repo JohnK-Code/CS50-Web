@@ -1,0 +1,37 @@
+<!-- ##############################################################
+    SUBMIT PROJECT TO CS5O ONCE FIGURED OUT HOW TO DO IT :-) 
+    POSSIBLY TRY DOING LECTURE1 AS IT IS ON GIT AND IT MIGHT HELP LEARN HOW TO SUBMIT THE FILES FROM PROJECT0
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Search</title> <!-- Title shown in browser tab -->
+        <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- Sets page width to width of device -->
+        <link rel="stylesheet" href="CSS/search.css"> <!-- Links to CSS file for styling webpages-->
+    </head>
+    <body>
+
+        <div class="header"> <!-- Adds heading with page links and heading image -->
+            <a href="search.html">
+                <img style="width: 100px; height: 50px;" src="images/search.png" alt="Search Logo">
+            </a>
+            <div class="header-right">
+                <a class="active" href="search.html">Home</a>
+                <a href="image.html">Image Search</a>
+                <a href="advanced.html">Advanced Search</a>
+            </div>
+        </div>
+
+        <div class="search"> <!-- Adds form to web page and searches google with input entered -->
+            <form action="https://google.com/search">
+                <input placeholder="Search..." class="search-input" type="text" name="q">
+                <div id="buttons">
+                    <input type="submit" value="Google Search" class="search-submit" name="btnK" style="margin-right: 10px;">
+                    <input type="submit" value="I'm Feeling Lucky" class="search-submit" name="btnI">
+                </div>
+            </form>
+        </div>
+
+    </body>
+</html>

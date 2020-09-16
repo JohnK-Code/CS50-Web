@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Advanced Search</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="CSS/search.css">
+    </head>
+    <body>
+
+        <div class="header">
+            <a href="search.html">
+                <img style="width: 100px; height: 50px;" src="images/search.png" alt="Search Logo">
+            </a>
+            <div class="header-right">
+                <a href="search.html">Home</a>
+                <a href="image.html">Image Search</a>
+                <a class="active" href="advanced.html">Advanced Search</a>
+            </div>
+        </div>
+
+        <form id="advanced-form" action="https://google.com/search"> <!-- Adds form to carry out advanced search on google using input entered -->
+            <div id="grid-container">
+                <label for="all">All these words:</label>
+                <input class="advance-input" type="text" name="as_q" id="all">
+    
+                <label for="exact">This exact word or phrase:</label>
+                <input class="advance-input" type="text" name="as_epq" id="exact">
+    
+                <label for="any">Any of these words:</label>
+                <input class="advance-input" type="text" name="as_oq" id="any">
+    
+                <label for="none">None of these words:</label>
+                <input class="advance-input" type="text" name="as_eq" id="none">
+                
+                <label for="advance-submit"></label>
+                <input id="advance-submit" type="submit" value="Google Advanced Search">
+            </div>
+        </form>
+
+    </body>
+</html>
