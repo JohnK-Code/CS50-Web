@@ -9,7 +9,7 @@ This course can be accessed using either of the following sites:
 **List of modules:**
 - [HTML, CSS](https://github.com/JohnSoftware2018/CS50-Web/tree/master/Lecture-0)
 - [Git](https://github.com/JohnSoftware2018/CS50-Web/tree/master/Lecture-1) - [(Github Website Test)](https://github.com/JohnSoftware2018/CS50-Web/tree/master/Lecture-1-Website)
-- Python
+- [Python](https://github.com/JohnSoftware2018/CS50-Web/tree/master/Lecture-2)
 - Django
 - SQL, Models, and Migrations
 - JavaScript
