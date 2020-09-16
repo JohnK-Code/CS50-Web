@@ -7,7 +7,7 @@ This course can be accessed using either of the following sites:
 <br>
 
 **List of modules:**
-- HTML, CSS
+- [HTML, CSS](https://github.com/JohnSoftware2018/CS50-Web/tree/master/Lecture-0)
 - Git
 - Python
 - Django
