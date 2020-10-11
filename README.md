@@ -10,7 +10,7 @@ This course can be accessed using either of the following sites:
 - [HTML, CSS](https://github.com/JohnSoftware2018/CS50-Web/tree/master/Lecture-0)
 - [Git](https://github.com/JohnSoftware2018/CS50-Web/tree/master/Lecture-1) - [(Github Website Test)](https://github.com/JohnSoftware2018/CS50-Web/tree/master/Lecture-1-Website)
 - [Python](https://github.com/JohnSoftware2018/CS50-Web/tree/master/Lecture-2)
-- Django
+- [Django](https://github.com/JohnSoftware2018/CS50-Web/tree/master/Lecture-3/lecture3project)
 - SQL, Models, and Migrations
 - JavaScript
 - User Interfaces
