@@ -4,8 +4,11 @@ from django.urls import reverse
 
 from . import util
 import markdown2
+import random
 from markdown2 import Markdown
 from django import forms
+
+markdowner = Markdown()
 
 class NewWikiForm(forms.Form):
     title = forms.CharField(label="Title")
@@ -22,7 +25,6 @@ def index(request):
     })
 
 def pages(request, page):
-    markdowner = Markdown()
     pageContent = util.get_entry(page)
     if pageContent:
         return render(request, "encyclopedia/pages.html", {
@@ -37,7 +39,6 @@ def pages(request, page):
 def search(request):
     searchTerm = request.GET.get("q")
     pageList = util.list_entries()
-    markdowner = Markdown()
     match = []
     if searchTerm in pageList:
         pageContent = util.get_entry(searchTerm)
@@ -84,9 +85,8 @@ def edit(request, page):
     if request.method == "POST":
         newForm = WikiEditForm(request.POST)
         if newForm.is_valid():
-            title = newForm.cleaned_data["title"]
             content = newForm.cleaned_data["content"]
-            util.save_entry(title, content)
+            util.save_entry(page, content)
             return HttpResponseRedirect(reverse("wiki:page", kwargs={"page":page}))
     else:
         form = WikiEditForm()
@@ -99,3 +99,8 @@ def edit(request, page):
             "pageContent": pageContent,
             "form": form
         })
+
+def randomPage(request):
+    entries = util.list_entries()
+    selected_page = random.choice(entries)
+    return HttpResponseRedirect(reverse("wiki:page", kwargs={"page":selected_page}))
