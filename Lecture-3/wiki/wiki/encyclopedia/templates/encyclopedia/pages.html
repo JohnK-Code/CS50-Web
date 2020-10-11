@@ -1,0 +1,11 @@
+<!-- finish the edit page section of cs50 django project1-->
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    {{ pageName }}
+{% endblock %}
+
+{% block body %}
+    {{ pageContent|safe }}
+    <a href="{{ pageName }}/edit">Edit Page</a>
+{% endblock %}
