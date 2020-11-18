@@ -1,0 +1,23 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>Active Listings</h2>
+
+    {% for listing in listings %}
+        <h4>{{ listing.title }}</h4>
+        {% if listing.image %}
+            <img src="images/{{ listing.image }}" width="300px" height="300px"> <!-- shows image from model if not empty -->
+        {% else %}
+            <img src="images/upload/default.jpg" width="300px" height="300px"> <!-- shows default image if image in model empty -->
+        {% endif %}
+        <h6>Make: {{ listing.make }}</h6>
+        <h6>Model: {{ listing.model }}</h6>
+        <h6>Category: {{ listing.category }}</h6>
+        <h6>User: {{ listing.user }}</h6>
+        <h6>Starting Bid: £{{ listing.startingBid }}</h6>
+        <h6>Start Time: {{ listing.startTime }}</h6>
+        <h6>End Time: {{ listing.endTime }}</h6>
+        <h6>Active: {{ listing.active }}</h6>
+    {% endfor %}
+
+{% endblock %}
