@@ -1,3 +1,107 @@
 body {
     padding: 10px;
 }
+
+/* css for active listing page - also some css for watchlist page */
+.div-listing {
+    border-top: 1px solid gray;
+    margin: 0 0 20px 20px;
+}
+.div-listing img {
+    margin-top: 10px;
+}
+#index-heading {
+    margin-left: 20px;
+}
+
+/* css for create listing page - form */
+#form-div {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    width: 70%;
+    margin: 20px;
+    padding: 20px;
+}
+#id_category, #id_title, #id_make, #id_model, #id_year, 
+#id_description, #id_image, #id_startBid {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+#new-submit {
+    width: 100%;
+    background-color: #017865;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+#new-submit:hover {
+    background-color: #00514a;
+}
+
+/* CSS for current listing page */
+#advert-details {
+    margin: 30px 0px 10px 0px;
+}
+.advert-image {
+    margin: 20px 0px 20px 0px;
+}
+#watch-form {
+    margin: 10px 0 30px 0px;
+}
+#bid-form {
+    margin-left: 0px;
+    margin-bottom: 20px;
+}
+#bid-form button {
+    position: absolute;
+    margin-left: 5px;
+}
+#comment-heading {
+    margin-left: 0px;
+}
+.comments {
+    margin: 15px 0 20px 20px;
+    width: 50%;
+    border: gray solid 1px;
+}
+.comments h6 {
+    margin-left: 5px;
+    margin-top: 5px;
+}
+.comments li {
+    list-style: none;
+}
+#comment-form {
+    margin-left: 20px;
+    margin-bottom: 30px;
+}
+#comment-form label {
+    font-weight: 500;
+}
+#comment-form label, #comment-form textarea, #comment-form button {
+    display: block;
+}
+#comment-form textarea {
+    margin-bottom: 20px;
+}
+.advert-ended{
+    margin: 20px 0 30px 0px;
+
+}
+#login-listing {
+    display: inline-block;
+    margin: 5px 0 30px 0;
+}
+
+/* CSS for watchlist page - more in active listing page CSS section */
+#watchlist-heading {
+    margin-left: 20px;
+}

@@ -1,16 +1,15 @@
-{% extends "auctions/layout.html" %}
+{% extends 'auctions/layout.html' %}
 {% load humanize %}
 
 {% block body %}
-    <h2 id="index-heading">Active Listings</h2>
-
+    <h2>{{ listing.0.category }}</h2>
     {% for listing in listings %}
         <div class="div-listing">
             {% if listing.active %}
                 {% if listing.image %}
-                    <img src="images/{{ listing.image }}" width="300px" height="300px"> <!-- shows image from model if not empty -->
+                    <img src="/images/{{ listing.image }}" width="300px" height="300px"> <!-- shows image from model if not empty -->
                 {% else %}
-                    <img src="images/upload/default.jpg" width="300px" height="300px"> <!-- shows default image if image in model empty -->
+                    <img src="/images/upload/default.jpg" width="300px" height="300px"> <!-- shows default image if image in model empty -->
                 {% endif %}
                 <h4><a href="{% url 'listing' listing.id %}">{{ listing.title }}</a></h4>
                 <h6>{{ listing.description }}</h6>
@@ -22,5 +21,4 @@
             {% endif %}
         </div>
     {% endfor %}
-
-{% endblock %}
+{% endblock body %}

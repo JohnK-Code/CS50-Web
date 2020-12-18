@@ -20,12 +20,18 @@
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'index' %}">Active Listings</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'categories' %}">Categories</a>
+            </li>
             {% if user.is_authenticated %}
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
+                    <a class="nav-link" href="{% url 'newlisting' %}">Create Advert</a>
+                </li>
+                <li>
+                    <a class="nav-link" href="{% url 'watchlist' %}">View Watchlist</a> <!-- View logged in users watchlist -->
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'newlisting' %}">Create Advert</a>
+                    <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
                 </li>
             {% else %}
                 <li class="nav-item">

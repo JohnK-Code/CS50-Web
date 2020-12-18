@@ -30,7 +30,7 @@ class NewListingForm(forms.Form):
     make = forms.ChoiceField(label="Make", choices=MODEL_CHOICES)
     model = forms.CharField(label="Model", max_length=20)
     year = forms.ChoiceField(choices=YEAR_CHOICES, initial=2020, label="Year")
-    description = forms.CharField(label="Description", max_length=300)
+    description = forms.CharField(label="Description", widget=forms.Textarea(attrs={"rows":5, "cols":30}))
     image = forms.ImageField(required=False) # allows images to be uploaded using form, can be left empty though
     # user info added in model 
     startBid = forms.IntegerField(max_value=10000000, min_value=0)

@@ -1,0 +1,29 @@
+{% extends "auctions/layout.html" %}
+{% load humanize %}
+
+{% block body %}
+
+    <h2 id="watchlist-heading">Watchlist</h2>
+
+    {% if userlist %}
+        {% for advert in userlist %}
+            <div class="div-listing">
+                {% if advert.image %}
+                    <img src="images/{{ advert.image }}" width="300px" height="300px">
+                {% else %}
+                    <img src="images/upload/default.jpg" width="300px" height="300px">
+                {% endif %}
+                <h4><a href="{% url 'listing' advert.id %}">{{ advert.title }}</a></h4>
+                <h6>{{ advert.description }}</h6>
+                {% if advert.bid_listing.last.currentBid %}
+                    <h6>£{{ advert.bid_listing.last.currentBid|intcomma }}</h6>
+                {% else %}
+                    <h6>£{{ advert.startingBid|intcomma }}</h6>
+                {% endif %}
+            </div>
+        {% endfor %}
+    {% else %}
+        <h4>You have no items in your watchlist.</h4>
+    {% endif %}
+
+{% endblock  %}

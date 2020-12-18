@@ -6,12 +6,13 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from .forms import NewListingForm
 
-from .models import User, Listing, Bid, Comment
+from .models import User, Listing, Bid, Comment, categories
+from decimal import Decimal
 
 
 def index(request):
     return render(request, "auctions/index.html", {
-        "listings": Listing.objects.all().order_by('startTime'),
+        "listings": Listing.objects.all().order_by('-startTime'),
         "bids": Bid.objects.all()
     })
 
@@ -71,7 +72,7 @@ def register(request):
 @login_required(login_url="login")
 def newlisting(request):
     if request.method == "POST":
-        # Get form data
+        # Access form data
         category = request.POST['category']
         title = request.POST['title']
         make = request.POST['make']
@@ -80,7 +81,7 @@ def newlisting(request):
         description = request.POST['description']
         startBid = request.POST['startBid']
         user = request.user.id
-        image = request.FILES.get('images', None) # used to get files from request or provide default
+        image = request.FILES.get('image', None) # used to get files from request or provide default
 
         # create listing
         try:
@@ -95,4 +96,128 @@ def newlisting(request):
     else:
         return render(request, 'auctions/newlisting.html', {
         'form': NewListingForm
+        })
+
+def listing(request, id):
+    if not request.user.is_authenticated:
+        return render(request, "auctions/listing.html", {
+            "advert": Listing.objects.get(id=id)    
+        })
+    else:
+        listing = Listing.objects.get(id=id)
+        if listing.bid_listing.exists():
+            is_watch_list = request.user.watchlist.filter(pk=id)
+            return render(request, "auctions/listing.html", {
+                "advert": listing,
+                "current_user": request.user.id,
+                'is_watch_list': is_watch_list,
+                'price': listing.bid_listing.last().currentBid + 50,
+                'commentList': listing.comment_listing.all().order_by('-commentTime')  #############################
+            })
+        else:
+            is_watch_list = request.user.watchlist.filter(pk=id)
+            return render(request, "auctions/listing.html", {
+                "advert": listing,
+                "current_user": request.user.id,
+                'is_watch_list': is_watch_list,
+                'price': listing.startingBid + 50,
+                'commentList': listing.comment_listing.all().order_by('-commentTime')
+            })
+
+
+@login_required
+def watchlistedit(request, id):
+    if request.method == "POST":
+        user = request.user
+        listing = Listing.objects.get(pk=id)
+        if user.watchlist.filter(pk=id).exists():
+            user.watchlist.remove(listing)
+        else:
+            user.watchlist.add(listing)
+        
+    return HttpResponseRedirect(reverse("listing", args=(id,)))
+
+@login_required
+def newbid(request, id):
+    if request.method == "POST":
+        listing = Listing.objects.get(pk=id)
+        bid = Decimal(request.POST['bid'])
+        biduser = request.user
+
+        if Bid.objects.filter(listing=listing):
+            oldprice = listing.bid_listing.last().currentBid
+            if  bid > oldprice:
+                newbid = Bid(listing=listing, currentBid=bid, bidder=biduser)
+                newbid.save()
+                return HttpResponseRedirect(reverse("listing", args=(id,)))
+            else:
+                return render(request, "auctions/listing.html", {
+                "advert": Listing.objects.get(id=id),
+                "current_user": request.user.id,
+                'is_watch_list': request.user.watchlist.filter(pk=id),
+                "low": "Please, enter a bid higher than the Current Price!",
+                "price": listing.bid_listing.last().currentBid + 10,
+                'commentList': listing.comment_listing.all().order_by('-commentTime')
+                })
+        else:
+            if bid > listing.startingBid:
+                newbid = Bid(listing=listing, currentBid=bid, bidder=biduser)
+                newbid.save()
+                return HttpResponseRedirect(reverse("listing", args=(id,)))
+            else:
+                return render(request, "auctions/listing.html", {
+                "advert": Listing.objects.get(id=id),
+                "current_user": request.user.id,
+                'is_watch_list': request.user.watchlist.filter(pk=id),
+                "low": "Please, enter a bid higher than the Current Price!",
+                "price": listing.startingBid + 10,
+                'commentList': listing.comment_listing.all().order_by('-commentTime')
+                })
+
+
+@login_required
+def activeadvert(request, id):
+    if request.method == "POST":
+        listing = Listing.objects.get(pk=id)
+        if listing.active:
+            listing.active = False
+            listing.save()
+            return HttpResponseRedirect(reverse("listing", args=(id,)))
+        else:
+            listing.active = True
+            listing.save()
+            return HttpResponseRedirect(reverse('listing', args=(id,)))
+
+
+@login_required
+def comment(request, id):
+    if request.method == "POST":
+        listing = Listing.objects.get(pk=id)
+        commentNew = request.POST["comment"]
+        commentuser = request.user
+
+        newComment = Comment(comment=commentNew, user=commentuser, listing=listing)
+        newComment.save()
+        return HttpResponseRedirect(reverse('listing', args=(id,)))
+
+@login_required
+def watchlist(request):
+    user = request.user
+    return render(request, "auctions/watchlist.html", {
+        "userlist": user.watchlist.all()
+    })
+
+def category(request):
+    categoryList = []
+    for item in categories:
+        categoryList.append(item[0]) 
+    return render(request, "auctions/categories.html", {
+        'categories': categoryList
+    })
+
+def categoryList(request, category):
+    if request.method == "POST":
+        listings = Listing.objects.filter(category=category)
+        return render(request, "auctions/categoryList.html", {
+            "listings": listings
         })

@@ -1,0 +1,119 @@
+{% extends "auctions/layout.html" %}
+
+{% load humanize %}
+
+{% block body %}
+    <div id="advert-details">
+        <h2>{{ advert.title }}</h2>
+        {% if advert.image %}
+            <img src="/images/{{ advert.image }}" width="300px" height="300px" class="advert-image">
+        {% else %}
+            <img src="/images/upload/default.jpg" width="300px" height="300px" class="advert-image">
+        {% endif %}
+        <h4>Make: {{ advert.make }}</h4>
+        <h4>Model: {{ advert.model }}</h4>
+        <h6>Category: {{ advert.category }}</h6>
+        <h6>Year: {{  advert.year }}</h6>
+        <h6>{{ advert.description }}</h6>
+
+        {% if advert.bid_listing.last.currentBid %}
+            <h6>Price: £{{ advert.bid_listing.last.currentBid|intcomma }}</h6>
+        {% else %}
+            <h6>Price: £{{ advert.startingBid|intcomma }}</h6>
+        {% endif %}
+
+        {{ low }}
+
+    </div>
+
+    {% if user.is_authenticated %} <!-- Checks user is logged in  -->
+        {% if current_user != advert.user.id %} <!-- Checks wether the current user is the person who didn't create the add -->
+            {% if advert.active %} <!-- Checks if add is active -->
+
+                <form action="{% url 'bid' advert.id %}" method="POST" enctype="multipart/form-data" id="bid-form"> <!-- Form for user who didn't create add to place bid on item -->
+                    {% csrf_token %}
+                    <input type="number" name="bid" placeholder="£{{ price|intcomma }}" required>
+                    <button type="submit" class="btn btn-outline-primary btn-sm" style="width: 2cm;">Bid</button>
+                </form>
+
+                <form action="{% url 'watchlistedit' advert.id %}" method="POST" enctype="multipart/form-data" id="watch-form"> <!-- Form for user who didn't create advert to add or remove item from watch list -->
+                    {% csrf_token %}
+                    {% if is_watch_list %}
+                        <button type="submit" class="btn btn-outline-primary btn-sm" style="width: 4cm;">Unwatch</button>
+                    {% else %}
+                        <button type="submit" class="btn btn-outline-secondary btn-sm" style="width: 4cm;">Watch</button> 
+                    {% endif %}
+                </form>
+                
+                <h3 id="comment-heading">Comments</h3>
+                <div class="comments">
+                    {% for comments in commentList %}
+                        <h6>{{ comments.user }}: {{ comments.commentTime }}</h6>
+                        <ol>
+                            <li>{{ comments.comment }}</li>
+                        </ol>
+                    {% endfor %}
+                </div>
+
+                <form action="{% url 'addcomment' advert.id %}" method="POST" enctype="multipart/form-data" id="comment-form"> <!-- form for adding comment to listing for user who didn't create the advert -->
+                    {% csrf_token %}
+                    <label for="comment">Enter Comment</label>
+                    <textarea name="comment" id="listing-comment" cols="30" rows="5" placeholder="comment..."></textarea>
+                    <button type="submit" class="btn btn-outline-primary btn-sm" style="width: 4cm;">Submit</button>
+                </form>
+
+            {% else %} <!-- if advert not active run code in else block -->
+            
+                <div class="advert-ended">
+                    {% if advert.bid_listing.last.bidder.id == current_user %} <!-- Checks if current user was the highest bidder -->
+                        <h6>You won the auction</h6>
+                        <h5>Auction Ended</h5>
+                    {% else %}
+                        <h5>Auction Ended</h5>
+                    {% endif %}
+                </div>
+
+            {% endif %}
+        {% else %} <!-- If user did create advert run code in else block -->
+
+            {% if advert.active %} <!-- Checks if add is active -->
+
+                <h3 id="comment-heading">Comments</h3>
+                <div class="comments">
+                    {% for comments in commentList %}
+                        <h6>{{ comments.user }}: {{ comments.commentTime }}</h6>
+                        <ol>
+                            <li>{{ comments.comment }}</li>
+                        </ol>
+                    {% endfor %}
+                </div>
+
+                <form action="{% url 'addcomment' advert.id %}" method="POST" enctype="multipart/form-data" id="comment-form"> <!-- form for adding comment to listing for user who created advert -->
+                    {% csrf_token %}
+                    <label for="comment">Enter Comment</label>
+                    <textarea name="comment" id="listing-comment" cols="30" rows="5" placeholder="comment..."></textarea>
+                    <button type="submit" class="btn btn-outline-primary btn-sm" style="width: 4cm;">Submit</button>
+                </form>
+            {% endif %}
+
+            <form class="advert-ended" action="{% url 'active' advert.id %}" method="POST" enctype="multipart/form-data"> <!-- Form for advert creater to open or close advert-->
+                {% csrf_token %}
+                {% if advert.active %} 
+                    <button type="submit" class="btn btn-outline-primary btn-sm" style="width: 4cm;">Close Advert</button>
+                {% else %}
+                    <h6>Advert Ended</h6>
+                    {% if advert.bid_listing.last.bidder %}
+                        <p>The Winning Bidder was {{ advert.bid_listing.last.bidder }}</p>
+                    {% else %}
+                        <p>No one bidded on your item.</p>
+                    {% endif %}
+                    <button type="submit" class="btn btn-outline-secondary btn-sm" style="width: 4cm;">Re-list Advert</button> 
+                {% endif %}
+            </form>
+
+        {% endif %}
+
+    {% else %}
+        <a id="login-listing" href="{% url 'login' %}">Login to view more details</a>
+    {% endif %} 
+{% endblock  %}
