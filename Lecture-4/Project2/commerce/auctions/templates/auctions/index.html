@@ -13,7 +13,9 @@
                     <img src="images/upload/default.jpg" width="300px" height="300px"> <!-- shows default image if image in model empty -->
                 {% endif %}
                 <h4><a href="{% url 'listing' listing.id %}">{{ listing.title }}</a></h4>
-                <h6>{{ listing.description }}</h6>
+                <h6>Make: {{ listing.make }}</h6>
+                <h6>Model: {{ listing.model }}</h6>
+                <h6>Year: {{ listing.year }}</h6>
                 {% if listing.bid_listing.last.currentBid %}
                     <h6>£{{ listing.bid_listing.last.currentBid|intcomma }}</h6>
                 {% else %}

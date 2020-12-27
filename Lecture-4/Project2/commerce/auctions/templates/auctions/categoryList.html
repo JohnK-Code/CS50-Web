@@ -2,10 +2,10 @@
 {% load humanize %}
 
 {% block body %}
-    <h2>{{ listing.0.category }}</h2>
+    <h2>{{ listings.0.category }}</h2>
     {% for listing in listings %}
-        <div class="div-listing">
-            {% if listing.active %}
+        {% if listing.active %}
+            <div class="div-listing">
                 {% if listing.image %}
                     <img src="/images/{{ listing.image }}" width="300px" height="300px"> <!-- shows image from model if not empty -->
                 {% else %}
@@ -18,7 +18,7 @@
                 {% else %}
                     <h6>£{{ listing.startingBid|intcomma }}</h6>
                 {% endif %}
-            {% endif %}
-        </div>
+            </div>
+        {% endif %}
     {% endfor %}
 {% endblock body %}

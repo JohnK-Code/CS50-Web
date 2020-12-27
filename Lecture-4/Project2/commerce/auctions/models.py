@@ -56,6 +56,10 @@ class Listing(models.Model):
     def __str__(self):
         return f"Advert: {self.title}"
 
+    def delete(self, *args, **kwargs): # used to delete image file when advert deleted :-)
+        self.image.delete()
+        super().delete(*args, **kwargs)
+
 # model used to store Bid data and who placed it 
 class Bid(models.Model):
     listing = models.ForeignKey(Listing, models.CASCADE, related_name="bid_listing")

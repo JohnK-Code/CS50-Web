@@ -94,7 +94,13 @@ body {
 }
 .advert-ended{
     margin: 20px 0 30px 0px;
-
+    display: inline-block;
+}
+.delete-advert {
+    display: inline-block;
+}
+.delete-advert button {
+    padding: 4px 20px;
 }
 #login-listing {
     display: inline-block;

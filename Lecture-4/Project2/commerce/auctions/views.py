@@ -221,3 +221,9 @@ def categoryList(request, category):
         return render(request, "auctions/categoryList.html", {
             "listings": listings
         })
+
+def delete(request, id):
+    if request.method == "POST":
+        advert = Listing.objects.get(pk=id)
+        advert.delete()
+    return HttpResponseRedirect(reverse('index'))

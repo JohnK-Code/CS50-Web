@@ -1,3 +1,12 @@
+<!--
+
+    All features of the website have been completed. ** I think. **
+    Test everything is working and maybe style it to look a bit nicer before moving onto next lesson.
+    Maybe ask Kirsty to test it.
+    :-)
+
+-->
+
 {% extends "auctions/layout.html" %}
 
 {% load humanize %}
@@ -14,7 +23,7 @@
         <h4>Model: {{ advert.model }}</h4>
         <h6>Category: {{ advert.category }}</h6>
         <h6>Year: {{  advert.year }}</h6>
-        <h6>{{ advert.description }}</h6>
+        <p>{{ advert.description|linebreaks }}</p>
 
         {% if advert.bid_listing.last.currentBid %}
             <h6>Price: £{{ advert.bid_listing.last.currentBid|intcomma }}</h6>
@@ -78,7 +87,7 @@
 
             {% if advert.active %} <!-- Checks if add is active -->
 
-                <h3 id="comment-heading">Comments</h3>
+                <h3 id="comment-heading">Comments</h3> <!-- Display all comments-->
                 <div class="comments">
                     {% for comments in commentList %}
                         <h6>{{ comments.user }}: {{ comments.commentTime }}</h6>
@@ -94,6 +103,7 @@
                     <textarea name="comment" id="listing-comment" cols="30" rows="5" placeholder="comment..."></textarea>
                     <button type="submit" class="btn btn-outline-primary btn-sm" style="width: 4cm;">Submit</button>
                 </form>
+
             {% endif %}
 
             <form class="advert-ended" action="{% url 'active' advert.id %}" method="POST" enctype="multipart/form-data"> <!-- Form for advert creater to open or close advert-->
@@ -102,7 +112,7 @@
                     <button type="submit" class="btn btn-outline-primary btn-sm" style="width: 4cm;">Close Advert</button>
                 {% else %}
                     <h6>Advert Ended</h6>
-                    {% if advert.bid_listing.last.bidder %}
+                    {% if advert.bid_listing.last.bidder %} <!-- Displays who winning bidder was -->
                         <p>The Winning Bidder was {{ advert.bid_listing.last.bidder }}</p>
                     {% else %}
                         <p>No one bidded on your item.</p>
@@ -110,10 +120,17 @@
                     <button type="submit" class="btn btn-outline-secondary btn-sm" style="width: 4cm;">Re-list Advert</button> 
                 {% endif %}
             </form>
+            
+            {% if advert.active == False %} <!-- Delete advert -->
+                <form class="delete-advert" action="{% url 'delete' advert.id %}" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <button class="btn btn-danger">Delete Advert</button>
+                </form>
+            {% endif %}
 
         {% endif %}
 
     {% else %}
-        <a id="login-listing" href="{% url 'login' %}">Login to view more details</a>
+        <a id="login-listing" href="{% url 'login' %}">Login to view more details</a> <!-- Used to login to view all details of advert-->
     {% endif %} 
 {% endblock  %}
