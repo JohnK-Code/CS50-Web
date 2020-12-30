@@ -1,0 +1,42 @@
+<!--
+    Watch end of video and maybe quickly go over notes for video.
+    Start project once have finished video and checked notes.
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Currency Exchange</title>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                
+                document.querySelector('form').onsubmit = () => {
+                    fetch('https://api.exchangeratesapi.io/latest?base=USD')
+                    .then(response => response.json())
+                    .then(data => {
+                        const currency = document.querySelector('#currency').value.toUpperCase();
+                        const rate = data.rates[currency];
+                        if (rate !== undefined){
+                            document.querySelector('#result').innerHTML = `1 USD is equal to ${rate.toFixed(3)} ${currency}.`;
+                        } else {
+                            document.querySelector('#result').innerHTML = 'Invalid currency.';
+                        }
+                    })
+                    .catch(function(error){
+                        console.log('Error:', error);
+                    });
+                    return false
+                }
+            });
+        </script>
+    </head>
+    <body>
+        <form>
+            <input type="text" id="currency" placeholder="Currency">
+            <input type="submit" value="Covert">
+        </form>
+        <div id="result">
+
+        </div>
+    </body>
+</html>
