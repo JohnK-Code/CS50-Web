@@ -1,3 +1,55 @@
+/* CSS for page font */
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500&display=swap');
+body {
+    font-family: 'Oswald', sans-serif;
+}
+
+/* CSS for email address heading  */
+#email_address {
+    margin-top: 10px;
+}
+
 textarea {
     min-height: 400px;
+}
+
+/* CSS for mailbox - Inbox, Sent & Archived */
+.new_email {
+    border: 1px solid black;
+    padding: 5px;
+    margin: 5px;
+}
+.read {
+    background-color: lightgray;
+}
+.unread {
+    background-color: whitesmoke;
+}
+
+/* CSS for email that has been opened */
+#open_email {
+    border: black 1px solid;
+    padding: 5px;
+    margin: 5px;
+    background-color: #dedede;
+}
+#email_body {
+    border: solid black 1px;
+    padding: 10px;
+    margin: 20px 5px;
+    background-color: whitesmoke;
+}
+#archived_button, #unarchived_button, #reply_button {
+    margin: 5px;
+}
+
+/* CSS for form */
+#compose-view {
+    margin-bottom: 40px;
+}
+#compose-body {
+    padding: 10px;
+}
+#form-button {
+    margin-top: 10px;
 }
