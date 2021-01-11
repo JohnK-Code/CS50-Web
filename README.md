@@ -12,7 +12,7 @@ This course can be accessed using either of the following sites:
 - [Python](https://github.com/JohnSoftware2018/CS50-Web/tree/master/Lecture-2)
 - [Django](https://github.com/JohnSoftware2018/CS50-Web/tree/master/Lecture-3/lecture3project)
 - [SQL, Models, and Migrations](https://github.com/JohnSoftware2018/CS50-Web/tree/master/Lecture-4)
-- JavaScript
+- [JavaScript](https://github.com/JohnSoftware2018/CS50-Web/tree/master/Lecture-5)
 - User Interfaces
 - Testing, CI/CD
 - Scalability and Security
