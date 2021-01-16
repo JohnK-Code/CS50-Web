@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Grow</title>
+        <style>
+            @keyframes grow {
+                from {
+                    font-size: 20px;
+                }
+                to {
+                    font-size: 100px;
+                }
+            }
+            h1 {
+                animation: grow 2s forwards;
+            }
+
+            @keyframes move {
+                0% {
+                    left: 0%;
+                }
+                50% {
+                    left: 50%;
+                }
+                100% {
+                    left: 0%;
+                }
+            }
+            h2 {
+                animation: move 2s forwards;
+                position: relative;
+            }
+        </style>
+    </head>
+    <body>
+        <h2>Welcome!!</h2>
+        <h1>Welcome!</h1>
+    </body>
+</html>
