@@ -41,4 +41,4 @@ class FlightTestCase(TestCase):
         f = Flight.objects.get(origin=a1, destination=a2, duration=-100)
         self.assertFalse(f.is_valid_flight())
 
-    
+## Test git code - Delete later 
