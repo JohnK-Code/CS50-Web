@@ -1,4 +1,4 @@
-##Add Passenger model from many-to-many section of tutorial
+# Add Passenger model from many-to-many section of tutorial
 
 from django.db import models
 
@@ -21,7 +21,7 @@ class Flight(models.Model):
         return f"{self.id}: {self.origin} to {self.destination}"
 
     def is_valid_flight(self):
-        return self.origin != self.destination or self.duration >= 0  ## change back to 'and' 
+        return self.origin != self.destination and self.duration >= 0
     
 
 class Passenger(models.Model):
