@@ -1,0 +1,32 @@
+{% extends 'network/layout.html' %}
+
+{% block body %}
+    <h2>{{ profile.username|title }}</h2>
+    <h5>Followers: {{ followers }}</h5>
+    {% if following %}
+        <h5>Following: {{ following }}</h5>
+    {% else %}
+        <h5>Following: 0</h5>
+    {% endif %}
+
+    {% if user.is_authenticated %}
+        {% if current_user != profile.id %}
+            <form action="{% url 'follow' profile.id %}" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {% if being_followed %}
+                    <button name="follow" value="unfollow">Unfollow</button>
+                {% else %}
+                    <button name="follow" value="follow">Follow</button>
+                {% endif %}
+            </form>
+        {% endif %}
+    {% endif %}
+
+    {% for post in posts %}
+        <div class="post">
+            {{ post.content }}
+        </div>
+    {% endfor %}
+
+{% endblock body %}
+

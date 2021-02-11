@@ -1,0 +1,17 @@
+/* CSS for New Post form */
+.form-div {
+    margin: 20px;
+}
+.post-form input[type=text] {
+    width: 300px;
+}
+
+/* CSS for posts */
+.post {
+    width: 70%;
+    border: black solid 1px;
+    border-radius: 5px;
+    margin: 20px;
+    padding: 10px;
+}
+.

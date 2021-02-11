@@ -1,0 +1,24 @@
+{% extends "network/layout.html" %}
+
+{% block body %}
+    <h1>All Posts</h1>
+    {% if user.is_authenticated %}
+        <div class="form-div">
+            <form class="post-form" action="{% url 'new_post' %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ post_form }}
+                <input type="submit" value="Post">
+            </form>
+        </div>
+        <p>{{ message }}</p>
+    {% endif %}
+
+    {% for post in all_posts %}
+        <div class="post">
+            <h3 class="author"><a href="{% url 'profile' post.author_id %}">{{ post.author|title }}</a></h3>
+            <p class="content">{{ post.content }}</p>
+            <p class="date">{{ post.date_created }}</p>
+            <p class="likes"><i class="fa fa-heart" aria-hidden="true" style="color:red"></i>{{ post.likes }}</p>
+        </div>
+    {% endfor %}
+{% endblock %}
