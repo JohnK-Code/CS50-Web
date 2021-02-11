@@ -1,7 +1,7 @@
 {% extends 'network/layout.html' %}
 
 {% block body %}
-    <h2>{{ profile.username|title }}</h2>
+    <h2 class="heading">{{ profile.username|title }}</h2>
     <h5>Followers: {{ followers }}</h5>
     {% if following %}
         <h5>Following: {{ following }}</h5>
@@ -24,7 +24,10 @@
 
     {% for post in posts %}
         <div class="post">
-            {{ post.content }}
+            <h3 class="author"><a href="{% url 'profile' post.author_id %}">{{ post.author|title }}</a></h3>
+            <p class="content">{{ post.content }}</p>
+            <p class="date">{{ post.date_created }}</p>
+            <p class="likes"><i class="fa fa-heart" area-hidden="true" style="color:red"></i>{{ post.likes }}</p>
         </div>
     {% endfor %}
 

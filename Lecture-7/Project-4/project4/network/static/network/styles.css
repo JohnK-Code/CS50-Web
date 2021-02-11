@@ -1,17 +1,54 @@
+body {
+    background-color: rgb(214, 247, 247);
+}
+/* CSS for page body */
+.body {
+    padding-bottom: 40px;
+} 
+.heading {
+    margin-left: 5%;
+    padding-top: 10px;
+}
+
 /* CSS for New Post form */
 .form-div {
-    margin: 20px;
+    height: auto;
+    margin: 0 auto;
+}
+.post-form {
+    border: 1px solid rgb(80, 83, 87);
+    width: 50%;
+    min-width: 400px;
+    margin: 0 auto;
+    padding: 10px;
+    overflow: hidden;
+}
+.post-form input {
+    display: block;
 }
 .post-form input[type=text] {
-    width: 300px;
+    width: 98%;
+    height: 10vh;
+    margin: 0 auto;
+}
+.post-form input[type=submit] {
+    float: right;
+    margin-right: 3%;
+    margin-top: 5px;
 }
 
 /* CSS for posts */
+.post-div {
+    margin-top: 60px;
+}
 .post {
     width: 70%;
     border: black solid 1px;
     border-radius: 5px;
-    margin: 20px;
+    margin: 0 auto;
     padding: 10px;
+    background-color: white;
 }
-.
+#heart {
+    margin-right: 5px;
+}

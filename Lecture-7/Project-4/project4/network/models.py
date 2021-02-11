@@ -2,6 +2,7 @@
 #
 #   Finished the following section and now doing a small amount of css before moving on 
 #   Test all sections working before moving on to Pagination
+#   *** Still doing CSS before moving on - this is a new comment 
 #
 #   Take time doing each section seperatly and don't rush 
 

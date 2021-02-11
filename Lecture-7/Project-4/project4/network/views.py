@@ -103,6 +103,7 @@ def profile_page(request, id):
     })
 
 # view for updating user followers in database
+@login_required(login_url=register)
 def follow(request, id):
     if request.method == "POST":
         current_user = request.user
@@ -118,7 +119,7 @@ def follow(request, id):
         return HttpResponseRedirect(reverse("profile", args=(id,)))
 
 # view for displaying posts for all users being followed by current logged in user
-@login_required
+@login_required(login_url=register)
 def following(request):
     user = User.objects.get(id=request.user.id)
     following = user.followers.all()
