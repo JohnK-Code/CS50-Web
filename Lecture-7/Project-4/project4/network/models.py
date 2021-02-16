@@ -2,7 +2,9 @@
 #
 #   Finished the following section and now doing a small amount of css before moving on 
 #   Test all sections working before moving on to Pagination
-#   *** Still doing CSS before moving on - this is a new comment 
+#   *** Still finishing the css for layout before moving on to 'edit post' section  - 16/02/2021 - *** NEW COMMENT
+#   *** Fix css for next page buttons, then finish css before moving on
+#   
 #
 #   Take time doing each section seperatly and don't rush 
 

@@ -1,22 +1,48 @@
+/* CSS for all pages - currently contains, css for the body, heading and each post */
 body {
-    background-color: rgb(214, 247, 247);
+    font-family: Arial, Helvetica, sans-serif;
+    background-image: url('images/Twitter-background.png');
+    background-repeat: no-repeat;
+    background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    -webkit-background-size: 100%;
+    -khtml-background-size: 100%;
 }
-/* CSS for page body */
 .body {
     padding-bottom: 40px;
 } 
-.heading {
-    margin-left: 5%;
-    padding-top: 10px;
+.post-div { 
+    margin-top: 40px;
+}
+.post {
+    width: 70%;
+    border: black solid 1px;
+    border-radius: 5px;
+    margin: 0 auto;
+    padding: 15px;
+    background-color: white;
+}
+.author, .date {
+    display: inline;
+}
+.date {
+    float: right;
+}
+.post p {
+    margin: 0;
+}
+#heart {
+    margin-right: 5px;
+    size: 10px;
 }
 
-/* CSS for New Post form */
+
+/* CSS for index page - currently contains css for the new post form */
 .form-div {
-    height: auto;
-    margin: 0 auto;
+    margin-top: 20px;
 }
 .post-form {
-    border: 1px solid rgb(80, 83, 87);
     width: 50%;
     min-width: 400px;
     margin: 0 auto;
@@ -37,18 +63,42 @@ body {
     margin-top: 5px;
 }
 
-/* CSS for posts */
-.post-div {
-    margin-top: 60px;
+
+/* CSS for both profile and followers pages together - currently contains css for the heading div for both pages */
+.outside-heading-div {
+    margin-top: 20px;
 }
-.post {
-    width: 70%;
-    border: black solid 1px;
-    border-radius: 5px;
+.heading-div {
     margin: 0 auto;
-    padding: 10px;
+    width: 80%;
     background-color: white;
+    padding: 20px;
+    border: 1px solid black;
 }
-#heart {
-    margin-right: 5px;
+.heading {
+    display: inline;
+    color: #007bff;
+}
+
+
+/* CSS for profile page - currently contains for heading id and fillowers information */
+.followers {
+    margin-top: 10px;
+    margin-right: 10px;
+    float: right;
+    display: inline;
+    color: #007bff;
+}
+.profile-form-div {
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+.follow-button {
+    float: right;
+    margin-right: 20px;
+}
+@media screen and (max-width: 870px) {
+    .profile-div {
+        margin-top: 50px;
+    }
 }

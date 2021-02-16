@@ -1,35 +1,74 @@
 {% extends 'network/layout.html' %}
 
 {% block body %}
-    <h2 class="heading">{{ profile.username|title }}</h2>
-    <h5>Followers: {{ followers }}</h5>
-    {% if following %}
-        <h5>Following: {{ following }}</h5>
-    {% else %}
-        <h5>Following: 0</h5>
-    {% endif %}
+    <div class="outside-heading-div">
+        <div class="heading-div">
+            <h1 class="heading">{{ profile.username|title }}</h1>
+            <h4 class="followers">{{ followers }} Followers</h4>
+            {% if following %}
+                <h4 class="followers">{{ following }} Following  |</h4>
+            {% else %}
+                <h4 class="followers">0 Following  |</h4>
+            {% endif %}
 
-    {% if user.is_authenticated %}
-        {% if current_user != profile.id %}
-            <form action="{% url 'follow' profile.id %}" method="POST" enctype="multipart/form-data">
-                {% csrf_token %}
-                {% if being_followed %}
-                    <button name="follow" value="unfollow">Unfollow</button>
-                {% else %}
-                    <button name="follow" value="follow">Follow</button>
+            {% if user.is_authenticated %}
+                {% if current_user != profile.id %}
+                    <div class="profile-form-div">
+                        <form action="{% url 'follow' profile.id %}" method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {% if being_followed %}
+                                <button class="follow-button" name="follow" value="unfollow">Unfollow</button>
+                            {% else %}
+                                <button class="follow-button" name="follow" value="follow">Follow</button>
+                            {% endif %}
+                        </form>
+                    </div>
                 {% endif %}
-            </form>
-        {% endif %}
-    {% endif %}
+            {% endif %}
+        </div>
+    </div>
 
-    {% for post in posts %}
-        <div class="post">
-            <h3 class="author"><a href="{% url 'profile' post.author_id %}">{{ post.author|title }}</a></h3>
-            <p class="content">{{ post.content }}</p>
-            <p class="date">{{ post.date_created }}</p>
-            <p class="likes"><i class="fa fa-heart" area-hidden="true" style="color:red"></i>{{ post.likes }}</p>
+    {% comment "Code for posts before pagination added" %}
+        {% for post in posts %}
+            <div class="post-div profile-div">
+                <div class="post">
+                    <h3 class="author"><a href="{% url 'profile' post.author_id %}">{{ post.author|title }}</a></h3>
+                    <p class="date">{{ post.date_created }}</p>
+                    <p class="content">{{ post.content }}</p>
+                    <p class="likes"><i class="fa fa-heart" area-hidden="true" id="heart" style="color:red"></i>{{ post.likes }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    {% endcomment %}
+
+    {% for post in page_obj %}
+        <div class="post-div profile-div">
+            <div class="post">
+                <h3 class="author"><a href="{% url 'profile' post.author_id %}">{{ post.author|title }}</a></h3>
+                <p class="date">{{ post.date_created }}</p>
+                <p class="content">{{ post.content }}</p>
+                <p class="likes"><i class="fa fa-heart" area-hidden="true" id="heart" style="color:red"></i>{{ post.likes }}</p>
+            </div>
         </div>
     {% endfor %}
+
+<div class="pagination">
+    <span>
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span>
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">last&raquo;</a>
+        {% endif %}
+    </span>
+</div>
 
 {% endblock body %}
 

@@ -1,13 +1,20 @@
 {% extends 'network/layout.html' %}
 
 {% block body %}
-    {% if posts %}
-        {% for post in posts %}
-            <div class="post">
-                <h3 class="author"><a href="{% url 'profile' post.author_id %}">{{ post.author|title }}</a></h3>
-                <p class="content">{{ post.content }}</p>
-                <p class="date">{{ post.date_created }}</p>
-                <p class="likes"><i class="fa fa-heart" aria-hidden="true" style="color:red"></i>{{ post.likes }}</p>
+    <div class="outside-heading-div">
+        <div class="heading-div">
+            <h1 class="heading">Following</h1>
+        </div>
+    </div>
+    {% if page_obj %}
+        {% for post in page_obj %}
+            <div class="post-div">
+                <div class="post">
+                    <h3 class="author"><a href="{% url 'profile' post.author_id %}">{{ post.author|title }}</a></h3>
+                    <p class="date">{{ post.date_created }}</p>
+                    <p class="content">{{ post.content }}</p>
+                    <p class="likes"><i class="fa fa-heart" aria-hidden="true" style="color:red"></i>{{ post.likes }}</p>
+                </div>
             </div>
         {% endfor %}
     {% else %}
@@ -15,5 +22,24 @@
             <h3>You are not following any users yet.</h3>
         </div>
     {% endif %}
+
+<div class="pagination">
+    <span>
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span>
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">last&raquo;</a>
+        {% endif %}
+    </span>
+</div>
+
 {% endblock body %}
 
