@@ -1,6 +1,8 @@
 {% extends "network/layout.html" %}
 
 {% block body %}
+
+
     {% if user.is_authenticated %}
         <div class="form-div">
             <form class="post-form" action="{% url 'new_post' %}" method="post" enctype="multipart/form-data">
@@ -12,8 +14,22 @@
         <p>{{ message }}</p>
     {% endif %}
 
-{% comment "Code for posts before pagination added" %}
-    {% for post in all_posts %}
+
+    {% comment "Code for posts before pagination added" %}
+        {% for post in all_posts %}
+            <div class="post-div">
+                <div class="post">
+                    <h3 class="author"><a href="{% url 'profile' post.author_id %}">{{ post.author|title }}</a></h3> 
+                    <p class="date">{{ post.date_created }}</p>
+                    <p class="content">{{ post.content }}</p>
+                    <p class="likes"><i class="fa fa-heart" aria-hidden="true" id="heart" style="color:red"></i>{{ post.likes }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    {% endcomment %}
+
+
+    {% for post in page_obj %}
         <div class="post-div">
             <div class="post">
                 <h3 class="author"><a href="{% url 'profile' post.author_id %}">{{ post.author|title }}</a></h3> 
@@ -23,35 +39,25 @@
             </div>
         </div>
     {% endfor %}
-{% endcomment %}
 
-{% for post in page_obj %}
-    <div class="post-div">
-        <div class="post">
-            <h3 class="author"><a href="{% url 'profile' post.author_id %}">{{ post.author|title }}</a></h3> 
-            <p class="date">{{ post.date_created }}</p>
-            <p class="content">{{ post.content }}</p>
-            <p class="likes"><i class="fa fa-heart" aria-hidden="true" id="heart" style="color:red"></i>{{ post.likes }}</p>
-        </div>
+
+    <div class="page-nav-div">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+                {% if page_obj.has_previous %}
+                    <li class="page-item"><a class="page-link" href="?page=1">First</a></li>
+                    <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a></li>
+                {% endif %}
+                
+                <li class="page-item disabled"><a href="#" class="page-link">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.</a></li>
+
+                {% if page_obj.has_next %}
+                    <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a></li>
+                    <li class="page-item"><a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">Last</a></li>
+                {% endif %}
+            </ul>
+        </nav>
     </div>
-{% endfor %}
 
-<div class="pagination">
-    <span>
-        {% if page_obj.has_previous %}
-            <a href="?page=1">&laquo; first</a>
-            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
-        {% endif %}
-
-        <span>
-            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-        </span>
-
-        {% if page_obj.has_next %}
-            <a href="?page={{ page_obj.next_page_number }}">next</a>
-            <a href="?page={{ page_obj.paginator.num_pages }}">last&raquo;</a>
-        {% endif %}
-    </span>
-</div>
 
 {% endblock %}

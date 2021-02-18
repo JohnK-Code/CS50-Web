@@ -1,13 +1,11 @@
-/* CSS for all pages - currently contains, css for the body, heading and each post */
+/* CSS for all pages - currently contains, css for the body, heading, each post and pagination */
 body {
     font-family: Arial, Helvetica, sans-serif;
-    background-image: url('images/Twitter-background.png');
-    background-repeat: no-repeat;
-    background-size: 100%;
-    -moz-background-size: 100%;
-    -o-background-size: 100%;
-    -webkit-background-size: 100%;
-    -khtml-background-size: 100%;
+    background: url('images/Twitter-background.png') no-repeat center center fixed;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    -webkit-background-size: cover;
+    -khtml-background-size: cover;
 }
 .body {
     padding-bottom: 40px;
@@ -35,6 +33,12 @@ body {
 #heart {
     margin-right: 5px;
     size: 10px;
+}
+.page-nav-div {
+    margin: 40px;
+}
+.pagination {
+    text-align: center;
 }
 
 
@@ -66,7 +70,7 @@ body {
 
 /* CSS for both profile and followers pages together - currently contains css for the heading div for both pages */
 .outside-heading-div {
-    margin-top: 20px;
+    margin-top: 40px;
 }
 .heading-div {
     margin: 0 auto;

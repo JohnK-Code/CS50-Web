@@ -1,10 +1,12 @@
 #   on Specification (Following) - Section
 #
-#   Finished the following section and now doing a small amount of css before moving on 
-#   Test all sections working before moving on to Pagination
-#   *** Still finishing the css for layout before moving on to 'edit post' section  - 16/02/2021 - *** NEW COMMENT
-#   *** Fix css for next page buttons, then finish css before moving on
+#
+#   On edit post section now - need to figure out how to GET tweet data and how to POST the tweet data.
+#   Check AJAX bookmark to GET & POST data.
 #   
+#   Maybe try see if React or another javacsript library can allow me to add an edit form to a post when edit clicked.
+#   React hidden element via class may help ***
+#
 #
 #   Take time doing each section seperatly and don't rush 
 

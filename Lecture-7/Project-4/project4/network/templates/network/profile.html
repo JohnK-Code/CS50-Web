@@ -1,6 +1,8 @@
 {% extends 'network/layout.html' %}
 
 {% block body %}
+
+
     <div class="outside-heading-div">
         <div class="heading-div">
             <h1 class="heading">{{ profile.username|title }}</h1>
@@ -28,6 +30,7 @@
         </div>
     </div>
 
+
     {% comment "Code for posts before pagination added" %}
         {% for post in posts %}
             <div class="post-div profile-div">
@@ -41,6 +44,7 @@
         {% endfor %}
     {% endcomment %}
 
+
     {% for post in page_obj %}
         <div class="post-div profile-div">
             <div class="post">
@@ -52,23 +56,25 @@
         </div>
     {% endfor %}
 
-<div class="pagination">
-    <span>
-        {% if page_obj.has_previous %}
-            <a href="?page=1">&laquo; first</a>
-            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
-        {% endif %}
 
-        <span>
-            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-        </span>
 
-        {% if page_obj.has_next %}
-            <a href="?page={{ page_obj.next_page_number }}">next</a>
-            <a href="?page={{ page_obj.paginator.num_pages }}">last&raquo;</a>
-        {% endif %}
-    </span>
-</div>
+    <div class="page-nav-div">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+                {% if page_obj.has_previous %}
+                    <li class="page-item"><a class="page-link" href="?page=1">First</a></li>
+                    <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a></li>
+                {% endif %}
+                
+                <li class="page-item disabled"><a href="#" class="page-link">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.</a></li>
+
+                {% if page_obj.has_next %}
+                    <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a></li>
+                    <li class="page-item"><a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">Last</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
 
 {% endblock body %}
 
